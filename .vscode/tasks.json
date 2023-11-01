@@ -1,0 +1,53 @@
+// CAUTION: This file is for MacOS.
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: build active file",
+			"command": "c++",
+			"args": [
+				"-std=c++17",
+				"-fcolor-diagnostics",
+				"-fansi-escape-codes",
+				"-Wall",
+				"-g",
+
+				"-I${workspaceFolder}/dependencies/include",
+				"-L${workspaceFolder}/dependencies/lib-universal", //for MacOS
+				
+				"${file}",
+				"${workspaceFolder}/gl.c",
+				"${workspaceFolder}/dependencies/lib-universal/libglfw.3.dylib", //for MacOS
+				"-rpath",
+				"${workspaceFolder}/dependencies/lib-universal",
+
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}.out",
+
+				//for MacOS
+				"-framework",
+				"OpenGL",
+				"-framework",
+				"Cocoa",
+				"-framework",
+				"IOKit",
+				"-framework",
+				"CoreVideo",
+				"-framework",
+				"CoreFoundation",
+				"-Wno-deprecated",
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
